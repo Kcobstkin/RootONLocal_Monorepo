@@ -16,6 +16,7 @@ import {
 } from '../platform';
 import { useAuthStore } from '../store/useAuthStore';
 import { useStationStore } from '../store/useStationStore';
+import { useGroupStore } from '../store/useGroupStore';
 
 interface AppInitializerProps {
   children: React.ReactNode;
@@ -38,6 +39,8 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
   const restoreSession = useAuthStore((s) => s.restoreSession);
   const initStationStore = useStationStore((s) => s.initStore);
   const loadStations = useStationStore((s) => s.loadStations);
+  const initGroupStore = useGroupStore((s) => s.initStore);
+  const loadGroups = useGroupStore((s) => s.loadGroups);
 
   useEffect(() => {
     const init = async () => {
@@ -69,6 +72,11 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
         await loadStations();
         console.log('[AppInitializer] Stations loaded');
 
+        // Group 스토어 초기화 & DB에서 로드
+        initGroupStore(db);
+        await loadGroups();
+        console.log('[AppInitializer] Groups loaded');
+
         setIsReady(true);
       } catch (error) {
         console.error('[AppInitializer] Init failed:', error);
@@ -78,7 +86,7 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
     };
 
     init();
-  }, [initAuth, restoreSession, initStationStore, loadStations]);
+  }, [initAuth, restoreSession, initStationStore, loadStations, initGroupStore, loadGroups]);
 
   if (!isReady) {
     return (
