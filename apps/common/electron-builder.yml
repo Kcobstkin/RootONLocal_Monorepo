@@ -1,0 +1,14 @@
+appId: com.rooton.localcontrol
+productName: LocalControl
+directories:
+  output: dist-electron
+win:
+  target: nsis
+  icon: public/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+files:
+  - dist/**/*
+  - electron/**/*.js
+  - node_modules/**/*

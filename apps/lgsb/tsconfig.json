@@ -12,6 +12,7 @@
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite-env.d.ts"],
   "references": [
-    { "path": "../../packages/core" }
+    { "path": "../../packages/core" },
+    { "path": "./tsconfig.electron.json" }
   ]
 }

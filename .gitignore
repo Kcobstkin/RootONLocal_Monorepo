@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-electron/
+electron-dist/
 *.db
 .env.production
 .env.local
