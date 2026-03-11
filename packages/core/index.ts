@@ -18,6 +18,19 @@ export { EventListener } from './services/EventListener';
 export type { DeviceEvent } from './services/EventListener';
 export { SCHEMA_SQL, SEED_ADMIN_SQL } from './services/schema';
 
+// Store
+export { useAuthStore } from './store/useAuthStore';
+
+// Hooks
+export { usePermission } from './hooks/usePermission';
+export type { Permissions } from './hooks/usePermission';
+
+// Screens
+export { LoginScreen } from './screens/LoginScreen';
+
+// Components
+export { ProtectedRoute } from './components/ProtectedRoute';
+
 // Platform
 export {
   detectPlatform,

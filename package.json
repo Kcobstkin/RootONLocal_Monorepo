@@ -10,6 +10,7 @@
     "electron:common": "npm -w apps/common run electron:dev",
     "electron:lgsb": "npm -w apps/lgsb run electron:dev",
     "apk:common": "npm -w apps/common run apk",
-    "apk:lgsb": "npm -w apps/lgsb run apk"
+    "apk:lgsb": "npm -w apps/lgsb run apk",
+    "seed:users": "npx ts-node packages/core/scripts/seed-users.ts"
   }
 }

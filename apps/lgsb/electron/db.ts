@@ -91,6 +91,18 @@ CREATE TABLE IF NOT EXISTS app_settings (
 );
 `;
 
+/** 시드 사용자 SQL (SHA-256 해시) */
+const SEED_USERS_SQL = `
+INSERT OR IGNORE INTO users (login_id, password, name, user_level)
+VALUES ('admin@local', 'ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270', '관리자', 1);
+
+INSERT OR IGNORE INTO users (login_id, password, name, user_level)
+VALUES ('manager@local', '7b7686ab7dddaa1566a4922a9f8f964eb2d0b2fd193648e4fd7c0a81a708164b', '매니저', 5);
+
+INSERT OR IGNORE INTO users (login_id, password, name, user_level)
+VALUES ('user@local', '831c237928e6212bedaa4451a514ace3174562f6761f6a157a2fe5082b36e2fb', '사용자', 10);
+`;
+
 export class DbManager {
   private db: Database.Database | null = null;
 
@@ -110,6 +122,9 @@ export class DbManager {
     this.db.pragma('journal_mode = WAL');
     this.db.pragma('foreign_keys = ON');
     this.db.exec(SCHEMA_SQL);
+
+    // 시드 사용자 삽입 (이미 존재하면 무시)
+    this.db.exec(SEED_USERS_SQL);
 
     console.log('[DbManager] DB initialized successfully');
   }
