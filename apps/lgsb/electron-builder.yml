@@ -1,14 +1,34 @@
 appId: com.rooton.lgsb
 productName: LGSBControl
+copyright: Copyright © 2025 RootON
 directories:
   output: dist-electron
+  buildResources: build
+asar: true
 win:
-  target: nsis
+  target:
+    - target: nsis
+      arch:
+        - x64
   icon: public/icon.ico
+  publisherName: RootON
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
+  perMachine: true
+  language: 1042
+  installerIcon: public/icon.ico
+  uninstallerIcon: public/icon.ico
+  shortcutName: LGSBControl
 files:
   - dist/**/*
-  - electron/**/*.js
+  - electron-dist/**/*
   - node_modules/**/*
+  - "!node_modules/**/README*"
+  - "!node_modules/**/CHANGELOG*"
+  - "!node_modules/**/*.map"
+extraResources:
+  - from: node_modules/better-sqlite3/build
+    to: better-sqlite3/build
+    filter:
+      - "**/*.node"

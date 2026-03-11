@@ -1,6 +1,7 @@
 {
   "name": "localcontrol-monorepo",
   "private": true,
+  "version": "1.0.0",
   "workspaces": ["apps/common", "apps/lgsb", "packages/*"],
   "scripts": {
     "dev:common": "npm -w apps/common run dev",
@@ -9,8 +10,12 @@
     "build:lgsb": "npm -w apps/lgsb run build",
     "electron:common": "npm -w apps/common run electron:dev",
     "electron:lgsb": "npm -w apps/lgsb run electron:dev",
+    "electron:build:common": "npm -w apps/common run electron:build",
+    "electron:build:lgsb": "npm -w apps/lgsb run electron:build",
     "apk:common": "npm -w apps/common run apk",
     "apk:lgsb": "npm -w apps/lgsb run apk",
-    "seed:users": "npx ts-node packages/core/scripts/seed-users.ts"
+    "release:all": "npm run electron:build:common && npm run electron:build:lgsb",
+    "seed:users": "npx ts-node packages/core/scripts/seed-users.ts",
+    "version:bump": "npm version patch --workspaces --no-git-tag-version && npm version patch --no-git-tag-version"
   }
 }
