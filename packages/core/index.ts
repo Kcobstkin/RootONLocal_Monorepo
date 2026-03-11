@@ -29,6 +29,7 @@ export { usePermission } from './hooks/usePermission';
 export type { Permissions } from './hooks/usePermission';
 export { useDiscovery } from './hooks/useDiscovery';
 export { useGateway } from './hooks/useGateway';
+export { useEventListener } from './hooks/useEventListener';
 
 // Layout
 export { AppLayout } from './layout/AppLayout';
