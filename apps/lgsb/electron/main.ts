@@ -2,8 +2,9 @@
  * Electron Main Process (LGSB)
  */
 
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import path from 'path';
+import fs from 'fs';
 import { UdpManager } from './udp';
 import { DbManager } from './db';
 
@@ -69,6 +70,30 @@ ipcMain.handle('db:run', async (_event, sql: string, params?: unknown[]) => {
 
 ipcMain.handle('db:exec', async (_event, sql: string) => {
   return db.exec(sql);
+});
+
+// ─── File Dialog IPC 핸들러 (내보내기/불러오기) ──────────────
+
+ipcMain.handle('file:saveJson', async (_event, jsonStr: string, defaultName: string) => {
+  const result = await dialog.showSaveDialog({
+    title: '설정 내보내기',
+    defaultPath: defaultName,
+    filters: [{ name: 'JSON Files', extensions: ['json'] }],
+  });
+  if (result.canceled || !result.filePath) return { success: false };
+  fs.writeFileSync(result.filePath, jsonStr, 'utf-8');
+  return { success: true, filePath: result.filePath };
+});
+
+ipcMain.handle('file:openJson', async () => {
+  const result = await dialog.showOpenDialog({
+    title: '설정 불러오기',
+    filters: [{ name: 'JSON Files', extensions: ['json'] }],
+    properties: ['openFile'],
+  });
+  if (result.canceled || result.filePaths.length === 0) return { success: false };
+  const content = fs.readFileSync(result.filePaths[0], 'utf-8');
+  return { success: true, content, filePath: result.filePaths[0] };
 });
 
 // ─── App Lifecycle ───────────────────────────────────────────

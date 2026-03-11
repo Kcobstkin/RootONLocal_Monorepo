@@ -1,5 +1,5 @@
 import type { UserRow } from '../types/auth.types';
-import type { StationRow, GroupRow, DeviceLogRow } from '../types/db.types';
+import type { StationRow, GroupRow, GroupDeviceRow, AppSettingRow, DeviceLogRow } from '../types/db.types';
 import type { DeviceRow } from '../types/device.types';
 
 /**
@@ -62,4 +62,14 @@ export interface ISqliteRepository {
 
   // ─── Log ──────────────────────────────────────────────────
   insertLog(log: DeviceLogRow): Promise<void>;
+
+  // ─── Export / Import 지원 ─────────────────────────────────
+  /** 전체 디바이스 목록 (station 무관) */
+  getAllDevices(): Promise<DeviceRow[]>;
+  /** 전체 group_devices 매핑 */
+  getAllGroupDevices(): Promise<GroupDeviceRow[]>;
+  /** 전체 app_settings */
+  getAllAppSettings(): Promise<AppSettingRow[]>;
+  /** groups, devices, group_devices, app_settings 초기화 (overwrite import용) */
+  clearExportableTables(): Promise<void>;
 }

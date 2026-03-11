@@ -7,6 +7,7 @@ import {
   DashboardScreen,
   GroupScreen,
   GroupSettingsScreen,
+  BackupRestoreScreen,
 } from '@localcontrol/core';
 import { APP_CONFIG } from './config/appConfig';
 import { BRAND } from './brand';
@@ -42,6 +43,14 @@ function App() {
               element={
                 <ProtectedRoute requiredLevel={5}>
                   <GroupSettingsScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="settings/backup"
+              element={
+                <ProtectedRoute requiredLevel={5}>
+                  <BackupRestoreScreen />
                 </ProtectedRoute>
               }
             />

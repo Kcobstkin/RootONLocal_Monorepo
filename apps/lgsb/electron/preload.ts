@@ -45,4 +45,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     exec: (sql: string) => ipcRenderer.invoke('db:exec', sql),
   },
+
+  // ─── File API (내보내기/불러오기) ────────────────────────
+  file: {
+    saveJson: (jsonStr: string, defaultName: string) =>
+      ipcRenderer.invoke('file:saveJson', jsonStr, defaultName),
+
+    openJson: () => ipcRenderer.invoke('file:openJson'),
+  },
 });

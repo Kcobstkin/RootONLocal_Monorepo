@@ -7,7 +7,7 @@
 
 import type { ISqliteRepository } from '../../services/ISqliteRepository';
 import type { UserRow } from '../../types/auth.types';
-import type { StationRow, GroupRow, DeviceLogRow } from '../../types/db.types';
+import type { StationRow, GroupRow, GroupDeviceRow, AppSettingRow, DeviceLogRow } from '../../types/db.types';
 import type { DeviceRow } from '../../types/device.types';
 
 interface ElectronDbAPI {
@@ -247,6 +247,26 @@ export class SqliteElectron implements ISqliteRepository {
       `INSERT INTO device_logs (device_id, action, payload, result, success)
        VALUES (?, ?, ?, ?, ?)`,
       [log.device_id, log.action, log.payload, log.result, log.success],
+    );
+  }
+
+  // ─── Export / Import 지원 ─────────────────────────────────
+
+  async getAllDevices(): Promise<DeviceRow[]> {
+    return (await this.db.query('SELECT * FROM devices')) as DeviceRow[];
+  }
+
+  async getAllGroupDevices(): Promise<GroupDeviceRow[]> {
+    return (await this.db.query('SELECT * FROM group_devices')) as GroupDeviceRow[];
+  }
+
+  async getAllAppSettings(): Promise<AppSettingRow[]> {
+    return (await this.db.query('SELECT * FROM app_settings')) as AppSettingRow[];
+  }
+
+  async clearExportableTables(): Promise<void> {
+    await this.db.exec(
+      'DELETE FROM group_devices; DELETE FROM dashboard_devices; DELETE FROM devices; DELETE FROM groups; DELETE FROM app_settings;',
     );
   }
 }

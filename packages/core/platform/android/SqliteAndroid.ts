@@ -7,7 +7,7 @@
 
 import type { ISqliteRepository } from '../../services/ISqliteRepository';
 import type { UserRow } from '../../types/auth.types';
-import type { StationRow, GroupRow, DeviceLogRow } from '../../types/db.types';
+import type { StationRow, GroupRow, GroupDeviceRow, AppSettingRow, DeviceLogRow } from '../../types/db.types';
 import type { DeviceRow } from '../../types/device.types';
 import { SCHEMA_SQL, SEED_ADMIN_SQL } from '../../services/schema';
 
@@ -253,6 +253,26 @@ export class SqliteAndroid implements ISqliteRepository {
     await this.run(
       'INSERT INTO device_logs (device_id, action, payload, created_at) VALUES (?, ?, ?, ?)',
       [log.device_id, log.action, log.payload ?? null, log.created_at ?? new Date().toISOString()],
+    );
+  }
+
+  // ─── Export / Import 지원 ───
+
+  async getAllDevices(): Promise<DeviceRow[]> {
+    return this.query<DeviceRow>('SELECT * FROM devices');
+  }
+
+  async getAllGroupDevices(): Promise<GroupDeviceRow[]> {
+    return this.query<GroupDeviceRow>('SELECT * FROM group_devices');
+  }
+
+  async getAllAppSettings(): Promise<AppSettingRow[]> {
+    return this.query<AppSettingRow>('SELECT * FROM app_settings');
+  }
+
+  async clearExportableTables(): Promise<void> {
+    await this.exec(
+      'DELETE FROM group_devices; DELETE FROM dashboard_devices; DELETE FROM devices; DELETE FROM groups; DELETE FROM app_settings;',
     );
   }
 }

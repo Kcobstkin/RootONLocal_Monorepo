@@ -17,6 +17,10 @@ export { AuthService } from './services/AuthService';
 export { EventListener } from './services/EventListener';
 export type { DeviceEvent } from './services/EventListener';
 export { SCHEMA_SQL, SEED_ADMIN_SQL } from './services/schema';
+export { exportToJson } from './services/ExportService';
+export type { ExportData } from './services/ExportService';
+export { previewImportData, importFromJson } from './services/ImportService';
+export type { ImportPreview, ImportMode } from './services/ImportService';
 
 // Store
 export { useAuthStore } from './store/useAuthStore';
@@ -40,6 +44,7 @@ export { LoginScreen } from './screens/LoginScreen';
 export { DashboardScreen } from './screens/DashboardScreen';
 export { GroupScreen } from './screens/GroupScreen';
 export { GroupSettingsScreen } from './screens/GroupSettingsScreen';
+export { BackupRestoreScreen } from './screens/BackupRestoreScreen';
 
 // Modals
 export { GroupModal } from './modals/GroupModal';

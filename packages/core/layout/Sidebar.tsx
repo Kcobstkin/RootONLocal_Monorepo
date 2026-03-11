@@ -138,6 +138,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
             ⚙ 구역 설정
           </button>
         )}
+
+        {/* 백업/복원 (관리자만) */}
+        {canManageGroups && (
+          <button
+            onClick={() => navigate('/settings/backup')}
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors
+              ${isActive('/settings/backup')
+                ? 'bg-blue-50 text-blue-700 font-medium'
+                : 'text-gray-600 hover:bg-gray-100'
+              }`}
+          >
+            💾 백업 / 복원
+          </button>
+        )}
       </nav>
 
       {/* 사용자 정보 + 로그아웃 */}
