@@ -59,12 +59,17 @@ Phase K  배포 패키징         ← 최종 산출물
 
 > **목적**: 프로젝트가 정상적으로 컴파일·실행되는지 확인
 
-### A-1. Vite 개발 서버 기동
+> ⚠️ **중요 — 웹 브라우저 접속은 UI 컴파일 확인용**  
+> `localhost:5173/5174`는 Vite가 React UI를 컴파일하는 개발 서버입니다.  
+> 브라우저에는 raw UDP가 없고 Electron IPC도 없으므로, **로그인 이후 기능(UDP, SQLite, 파일 I/O)은 동작하지 않습니다.**  
+> **실질적인 기능 테스트는 반드시 Electron EXE 또는 Android APK로 진행하세요.**
+
+### A-1. Vite 컴파일 확인 (UI 에러 여부 체크 전용)
 
 | # | 테스트 항목 | 실행 명령 | 기대 결과 | Pass |
 |---|-----------|----------|----------|------|
-| A-1-1 | common 앱 dev 서버 | `npm run dev:common` | `http://localhost:5173` 접속 가능, 콘솔 에러 없음 | ☐ |
-| A-1-2 | lgsb 앱 dev 서버 | `npm run dev:lgsb` | `http://localhost:5174` 접속 가능, 콘솔 에러 없음 | ☐ |
+| A-1-1 | common 앱 컴파일 | `npm run dev:common` | `http://localhost:5173` 접속 시 로그인 화면 렌더링, **브라우저 콘솔 JS 에러 없음** (기능 동작은 확인 불가) | ☐ |
+| A-1-2 | lgsb 앱 컴파일 | `npm run dev:lgsb` | `http://localhost:5174` 접속 시 로그인 화면 렌더링, 브라우저 콘솔 JS 에러 없음 | ☐ |
 
 ### A-2. TypeScript 컴파일
 
@@ -74,7 +79,10 @@ Phase K  배포 패키징         ← 최종 산출물
 | A-2-2 | common Electron 타입 체크 | `cd apps/common && npx tsc -p tsconfig.electron.json --noEmit` | 에러 0개 | ☐ |
 | A-2-3 | lgsb Electron 타입 체크 | `cd apps/lgsb && npx tsc -p tsconfig.electron.json --noEmit` | 에러 0개 | ☐ |
 
-### A-3. Electron 기동
+### A-3. Electron 기동 ← **실질적인 첫 번째 테스트**
+
+> Electron으로 실행해야 SQLite·UDP·IPC가 모두 활성화됩니다.  
+> Phase B 이후 모든 테스트는 **Electron EXE 또는 Android APK** 환경에서 진행하세요.
 
 | # | 테스트 항목 | 실행 명령 | 기대 결과 | Pass |
 |---|-----------|----------|----------|------|
