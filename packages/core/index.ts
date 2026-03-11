@@ -20,16 +20,20 @@ export { SCHEMA_SQL, SEED_ADMIN_SQL } from './services/schema';
 
 // Store
 export { useAuthStore } from './store/useAuthStore';
+export { useStationStore } from './store/useStationStore';
 
 // Hooks
 export { usePermission } from './hooks/usePermission';
 export type { Permissions } from './hooks/usePermission';
+export { useDiscovery } from './hooks/useDiscovery';
+export { useGateway } from './hooks/useGateway';
 
 // Screens
 export { LoginScreen } from './screens/LoginScreen';
 
 // Components
 export { ProtectedRoute } from './components/ProtectedRoute';
+export { AppInitializer } from './components/AppInitializer';
 
 // Platform
 export {
