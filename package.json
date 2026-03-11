@@ -1,0 +1,15 @@
+{
+  "name": "localcontrol-monorepo",
+  "private": true,
+  "workspaces": ["apps/common", "apps/lgsb", "packages/*"],
+  "scripts": {
+    "dev:common": "npm -w apps/common run dev",
+    "dev:lgsb": "npm -w apps/lgsb run dev",
+    "build:common": "npm -w apps/common run build",
+    "build:lgsb": "npm -w apps/lgsb run build",
+    "electron:common": "npm -w apps/common run electron:dev",
+    "electron:lgsb": "npm -w apps/lgsb run electron:dev",
+    "apk:common": "npm -w apps/common run apk",
+    "apk:lgsb": "npm -w apps/lgsb run apk"
+  }
+}

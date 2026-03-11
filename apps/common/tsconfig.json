@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@localcontrol/core": ["../../packages/core"],
+      "@localcontrol/core/*": ["../../packages/core/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite-env.d.ts"],
+  "references": [
+    { "path": "../../packages/core" }
+  ]
+}

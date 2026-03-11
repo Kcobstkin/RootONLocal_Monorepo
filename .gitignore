@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-electron/
+*.db
+.env.production
+.env.local
+*.apk
