@@ -1,0 +1,24 @@
+{
+  "name": "@localcontrol/capacitor-udp",
+  "version": "1.0.0",
+  "description": "Capacitor UDP plugin for LifeSmart local protocol",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["capacitor", "plugin", "udp"],
+  "capacitor": {
+    "android": {
+      "src": "android"
+    }
+  },
+  "peerDependencies": {
+    "@capacitor/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/core": "^6.0.0",
+    "typescript": "^5.5.0"
+  }
+}
