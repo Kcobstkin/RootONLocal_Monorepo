@@ -9,6 +9,7 @@ import {
   GroupSettingsScreen,
 } from '@localcontrol/core';
 import { APP_CONFIG } from './config/appConfig';
+import { BRAND } from './brand';
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
             path="/login"
             element={
               <LoginScreen
-                appName={APP_CONFIG.brand.appName}
-                themeColor="bg-green-600"
+                appName={BRAND.appName}
+                themeColor={BRAND.themeColor}
               />
             }
           />
@@ -28,8 +29,8 @@ function App() {
             element={
               <ProtectedRoute>
                 <AppLayout
-                  appName={APP_CONFIG.brand.appName}
-                  themeColor="bg-green-600"
+                  appName={BRAND.appName}
+                  themeColor={BRAND.themeColor}
                 />
               </ProtectedRoute>
             }
