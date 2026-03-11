@@ -1,0 +1,11 @@
+{
+  "java.project.sourcePaths": [],
+  "java.project.referencedLibraries": [],
+  "java.import.exclusions": [
+    "**/packages/capacitor-udp/android/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/dist-electron/**"
+  ],
+  "java.import.gradle.enabled": false
+}
