@@ -22,6 +22,7 @@ export { SCHEMA_SQL, SEED_ADMIN_SQL } from './services/schema';
 export { useAuthStore } from './store/useAuthStore';
 export { useStationStore } from './store/useStationStore';
 export { useGroupStore } from './store/useGroupStore';
+export { useDeviceStore } from './store/useDeviceStore';
 
 // Hooks
 export { usePermission } from './hooks/usePermission';
@@ -42,10 +43,13 @@ export { GroupSettingsScreen } from './screens/GroupSettingsScreen';
 // Modals
 export { GroupModal } from './modals/GroupModal';
 export type { GroupModalMode } from './modals/GroupModal';
+export { AddDeviceModal } from './modals/AddDeviceModal';
+export type { AddDeviceModalProps } from './modals/AddDeviceModal';
 
 // Components
 export { ProtectedRoute } from './components/ProtectedRoute';
 export { AppInitializer } from './components/AppInitializer';
+export { DeviceCard } from './components/DeviceCard';
 
 // Platform
 export {

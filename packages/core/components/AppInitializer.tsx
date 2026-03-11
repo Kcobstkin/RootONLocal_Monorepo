@@ -17,6 +17,7 @@ import {
 import { useAuthStore } from '../store/useAuthStore';
 import { useStationStore } from '../store/useStationStore';
 import { useGroupStore } from '../store/useGroupStore';
+import { useDeviceStore } from '../store/useDeviceStore';
 
 interface AppInitializerProps {
   children: React.ReactNode;
@@ -41,6 +42,7 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
   const loadStations = useStationStore((s) => s.loadStations);
   const initGroupStore = useGroupStore((s) => s.initStore);
   const loadGroups = useGroupStore((s) => s.loadGroups);
+  const initDeviceStore = useDeviceStore((s) => s.initStore);
 
   useEffect(() => {
     const init = async () => {
@@ -77,6 +79,10 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
         await loadGroups();
         console.log('[AppInitializer] Groups loaded');
 
+        // Device 스토어 초기화
+        initDeviceStore(db);
+        console.log('[AppInitializer] DeviceStore initialized');
+
         setIsReady(true);
       } catch (error) {
         console.error('[AppInitializer] Init failed:', error);
@@ -86,7 +92,7 @@ export const AppInitializer: React.FC<AppInitializerProps> = ({
     };
 
     init();
-  }, [initAuth, restoreSession, initStationStore, loadStations, initGroupStore, loadGroups]);
+  }, [initAuth, restoreSession, initStationStore, loadStations, initGroupStore, loadGroups, initDeviceStore]);
 
   if (!isReady) {
     return (
